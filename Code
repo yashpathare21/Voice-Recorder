@@ -1,0 +1,39 @@
+import sounddevice as sd 
+import wavio as wv
+
+
+def recorder(time_duration):
+    freq = 44100
+    duration = time_duration
+    print("Duration is", duration, "seconds")
+
+    recording = sd.rec(int(duration*freq), samplerate=freq, channels=2)
+    print("\nRecording...")
+    sd.wait()
+
+    location = "C:\\Users\\admin\\OneDrive\\Desktop\\voice\\Recordings\\recording1.wav"
+
+    wv.write(location, recording, freq, sampwidth=2)
+    print("\nRecording Saved!")
+
+
+while True:
+    print("\n1. Record \n2. Exit\n")
+    option = input("Enter here: ")
+    option = int(option)
+
+    if option == int(1):
+        time_duration = int(input("Enter recording duration (sec): "))
+        recorder(time_duration)
+
+    elif option == int(2):
+        break
+
+    else:
+        print("\n")
+        print("Sorry, try again!")
+        print("\n1. Record \n2. Exit")
+        print("\n")
+        option = input("Enter here: ")
+        option = int(option)
+
